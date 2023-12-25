@@ -1,0 +1,25 @@
+{
+    "name": "fjr-software/flinkbot-indicator",
+    "description": "Flinkbot - indicator component",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Francisco Júnior",
+            "email": "franciscojr.dev@gmail.com",
+            "homepage": "https://fjrsoftware.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FjrSoftware\\Flinkbot\\Indicator\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "ext-trader": "*",
+        "ext-bcmath": "*"
+    }
+}
