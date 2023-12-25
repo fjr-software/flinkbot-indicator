@@ -8,10 +8,17 @@ use LogicException;
 
 class Condition
 {
+    /**
+     * Constructor
+     *
+     * @param IndicatorInterface|IndicatorInterface[] $indicator
+     * @param string $operator
+     * @param float|array $value
+     */
     public function __construct(
-        private readonly IndicatorInterface $indicator,
+        private readonly IndicatorInterface|array $indicator,
         private readonly string $operator,
-        private readonly float $value
+        private readonly float|array $value
     ) {
     }
 
@@ -23,10 +30,15 @@ class Condition
      */
     public function isSatisfied(): bool
     {
-        $result = array_map(
-            [$this, 'condition'],
-            $this->indicator->getValue()
-        );
+        $indicators = is_array($this->indicator) ? $this->indicator : [$this->indicator];
+        $values = is_array($this->value) ? $this->value : [$this->value];
+        $result = [];
+
+        foreach ($indicators as $indicator) {
+            foreach ($indicator->getValue() as $key => $value) {
+                $result[] = $this->condition($value, $values[$key] ?? $values[0]);
+            }
+        }
 
         return !in_array(false, $result, true);
     }
@@ -34,11 +46,12 @@ class Condition
     /**
      * Check condition for given value
      *
-     * @param float $value
+     * @param float $value1
+     * @param float $value2
      * @return bool
      * @throws LogicException
      */
-    private function condition(float $value): bool
+    private function condition(float $value1, float $value2): bool
     {
         $operator = OperatorInterface::OPERATORS[$this->operator] ?? false;
 
@@ -46,7 +59,7 @@ class Condition
             throw new LogicException('Unknown operator: ' . $this->operator);
         }
 
-        return eval($this->parseOperator($value, $operator, $this->value));
+        return eval($this->parseOperator($value1, $operator, $value2));
     }
 
     /**
