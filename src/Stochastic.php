@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FjrSoftware\Flinkbot\Indicator;
 
-class Stochastic
+class Stochastic implements IndicatorInterface
 {
     private array $result = [];
 
@@ -43,9 +43,7 @@ class Stochastic
     }
 
     /**
-     * Get result
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getResult(): array
     {
@@ -53,9 +51,7 @@ class Stochastic
     }
 
     /**
-     * Get value
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getValue(): array
     {

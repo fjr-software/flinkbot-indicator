@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FjrSoftware\Flinkbot\Indicator;
 
-class StochasticRSI
+class StochasticRSI implements IndicatorInterface
 {
     /**
      * @var Stochastic
@@ -53,9 +53,7 @@ class StochasticRSI
     }
 
     /**
-     * Get result
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getResult(): array
     {
@@ -63,9 +61,7 @@ class StochasticRSI
     }
 
     /**
-     * Get value
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getValue(): array
     {

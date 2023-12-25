@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FjrSoftware\Flinkbot\Indicator;
 
-interface MovingAverageInterface
+interface MovingAverageInterface extends IndicatorInterface
 {
     /**
      * @const int

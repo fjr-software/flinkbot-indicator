@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FjrSoftware\Flinkbot\Indicator;
 
-class RelativeStrengthIndex
+class RelativeStrengthIndex implements IndicatorInterface
 {
     /**
      * @var array
@@ -25,9 +25,7 @@ class RelativeStrengthIndex
     }
 
     /**
-     * Get result
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getResult(): array
     {
@@ -35,12 +33,10 @@ class RelativeStrengthIndex
     }
 
     /**
-     * Get value
-     *
-     * @return float
+     * @inheritdoc
      */
-    public function getValue(): float
+    public function getValue(): array
     {
-        return end($this->result) ?? 0;
+        return [end($this->result)] ?? [];
     }
 }

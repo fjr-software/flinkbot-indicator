@@ -30,9 +30,7 @@ abstract class MovingAverage implements MovingAverageInterface
     }
 
     /**
-     * Get result
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getResult(): array
     {
@@ -40,12 +38,10 @@ abstract class MovingAverage implements MovingAverageInterface
     }
 
     /**
-     * Get value
-     *
-     * @return float
+     * @inheritdoc
      */
-    public function getValue(): float
+    public function getValue(): array
     {
-        return end($this->result) ?? 0;
+        return [end($this->result)] ?? [];
     }
 }
