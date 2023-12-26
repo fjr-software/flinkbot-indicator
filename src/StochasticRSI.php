@@ -22,6 +22,11 @@ class StochasticRSI implements IndicatorInterface
     private array $result = [];
 
     /**
+     * @var float
+     */
+    private float $symbolPrice = 0;
+
+    /**
      * Constructor
      *
      * @param array $values
@@ -50,6 +55,22 @@ class StochasticRSI implements IndicatorInterface
         );
 
         $this->result = $this->stochastic->getResult();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSymbolPrice(float $price): void
+    {
+        $this->symbolPrice = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSymbolPrice(): float
+    {
+        return $this->symbolPrice;
     }
 
     /**

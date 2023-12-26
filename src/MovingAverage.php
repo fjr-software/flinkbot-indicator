@@ -17,6 +17,11 @@ abstract class MovingAverage implements MovingAverageInterface
     private array $result = [];
 
     /**
+     * @var float
+     */
+    private float $symbolPrice = 0;
+
+    /**
      * Constructor
      *
      * @param array $values
@@ -27,6 +32,22 @@ abstract class MovingAverage implements MovingAverageInterface
         private readonly int $period
     ) {
         $this->result = trader_ma($this->values, $this->period, $this::TRADER_MA_TYPE) ?? [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSymbolPrice(float $price): void
+    {
+        $this->symbolPrice = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSymbolPrice(): float
+    {
+        return $this->symbolPrice;
     }
 
     /**

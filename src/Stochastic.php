@@ -9,6 +9,11 @@ class Stochastic implements IndicatorInterface
     private array $result = [];
 
     /**
+     * @var float
+     */
+    private float $symbolPrice = 0;
+
+    /**
      * Constructor
      *
      * @param array $high
@@ -40,6 +45,22 @@ class Stochastic implements IndicatorInterface
             $this->slowDPeriod,
             $this->slowDMAType
         ) ?? [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSymbolPrice(float $price): void
+    {
+        $this->symbolPrice = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSymbolPrice(): float
+    {
+        return $this->symbolPrice;
     }
 
     /**

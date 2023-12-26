@@ -12,6 +12,11 @@ class SymbolPrice implements IndicatorInterface
     private array $result = [];
 
     /**
+     * @var float
+     */
+    private float $symbolPrice = 0;
+
+    /**
      * Constructor
      *
      * @param array $values
@@ -20,6 +25,22 @@ class SymbolPrice implements IndicatorInterface
         private readonly array $values
     ) {
         $this->result = $this->values;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSymbolPrice(float $price): void
+    {
+        $this->symbolPrice = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSymbolPrice(): float
+    {
+        return $this->symbolPrice;
     }
 
     /**

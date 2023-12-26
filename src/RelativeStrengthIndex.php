@@ -12,6 +12,11 @@ class RelativeStrengthIndex implements IndicatorInterface
     private array $result = [];
 
     /**
+     * @var float
+     */
+    private float $symbolPrice = 0;
+
+    /**
      * Constructor
      *
      * @param array $values
@@ -22,6 +27,22 @@ class RelativeStrengthIndex implements IndicatorInterface
         private readonly int $period
     ) {
         $this->result = trader_rsi($this->values, $this->period) ?? [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSymbolPrice(float $price): void
+    {
+        $this->symbolPrice = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSymbolPrice(): float
+    {
+        return $this->symbolPrice;
     }
 
     /**
