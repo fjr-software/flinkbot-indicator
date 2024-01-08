@@ -19,18 +19,16 @@ class Aroon implements IndicatorInterface
     /**
      * Constructor
      *
-     * @param array $valuesHigh
-     * @param array $valuesLow
+     * @param array $values
      * @param int $period
      */
     public function __construct(
-        private readonly array $valuesHigh,
-        private readonly array $valuesLow,
+        private readonly array $values,
         private readonly int $period
     ) {
         $this->result = trader_aroon(
-            $this->valuesHigh,
-            $this->valuesLow,
+            $this->values[0],
+            $this->values[1],
             $this->period
         ) ?? [];
     }
