@@ -12,12 +12,12 @@ class Condition
      * Constructor
      *
      * @param IndicatorInterface|IndicatorInterface[] $indicator
-     * @param string $operator
+     * @param string|array $operator
      * @param float|array $value
      */
     public function __construct(
         private readonly IndicatorInterface|array $indicator,
-        private readonly string $operator,
+        private readonly string|array $operator,
         private readonly float|array $value
     ) {
     }
@@ -32,11 +32,14 @@ class Condition
     {
         $indicators = is_array($this->indicator) ? $this->indicator : [$this->indicator];
         $values = is_array($this->value) ? $this->value : [$this->value];
+        $operators = is_array($this->operator) ? $this->operator : [$this->operator];
         $result = [];
 
         foreach ($indicators as $indicator) {
             foreach ($indicator->getValue() as $key => $value) {
-                $result[] = $this->condition($value, $values[$key] ?? $values[0]);
+                foreach ($operators as $operator) {
+                    $result[] = $this->condition($operator, $value, $values[$key] ?? $values[0]);
+                }
             }
         }
 
@@ -46,17 +49,18 @@ class Condition
     /**
      * Check condition for given value
      *
+     * @param string $operator
      * @param float $value1
      * @param float $value2
      * @return bool
      * @throws LogicException
      */
-    private function condition(float $value1, float $value2): bool
+    private function condition(string $operator, float $value1, float $value2): bool
     {
-        $operator = OperatorInterface::OPERATORS[$this->operator] ?? false;
+        $operator = OperatorInterface::OPERATORS[$operator] ?? false;
 
         if (!$operator) {
-            throw new LogicException('Unknown operator: ' . $this->operator);
+            throw new LogicException('Unknown operator: ' . $operator);
         }
 
         return eval($this->parseOperator($value1, $operator, $value2));
