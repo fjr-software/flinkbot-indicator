@@ -37,9 +37,7 @@ class Condition
 
         foreach ($indicators as $indicator) {
             foreach ($indicator->getValue() as $key => $value) {
-                foreach ($operators as $operator) {
-                    $result[] = $this->condition($operator, $value, $values[$key] ?? $values[0]);
-                }
+                $result[] = $this->condition($operators[$key] ?? $operators[0], $value, $values[$key] ?? $values[0]);
             }
         }
 
