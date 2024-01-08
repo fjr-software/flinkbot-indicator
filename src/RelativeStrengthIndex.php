@@ -26,7 +26,7 @@ class RelativeStrengthIndex implements IndicatorInterface
         private readonly array $values,
         private readonly int $period
     ) {
-        $this->result = trader_rsi($this->values, $this->period) ?? [];
+        $this->result = trader_rsi($this->values[2], $this->period) ?? [];
     }
 
     /**

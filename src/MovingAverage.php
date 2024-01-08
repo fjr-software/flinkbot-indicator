@@ -31,7 +31,7 @@ abstract class MovingAverage implements MovingAverageInterface
         private readonly array $values,
         private readonly int $period
     ) {
-        $this->result = trader_ma($this->values, $this->period, $this::TRADER_MA_TYPE) ?? [];
+        $this->result = trader_ma($this->values[2], $this->period, $this::TRADER_MA_TYPE) ?? [];
     }
 
     /**

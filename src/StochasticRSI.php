@@ -40,7 +40,7 @@ class StochasticRSI implements IndicatorInterface
         private readonly int $slowKPeriod,
         private readonly int $slowDPeriod,
     ) {
-        $this->relativeStrengthIndex = new RelativeStrengthIndex($this->values, $this->fastKPeriod);
+        $this->relativeStrengthIndex = new RelativeStrengthIndex($this->values[2], $this->fastKPeriod);
         $rsi = $this->relativeStrengthIndex->getResult();
 
         $this->stochastic = new Stochastic(
