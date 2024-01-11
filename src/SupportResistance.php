@@ -69,8 +69,8 @@ class SupportResistance implements IndicatorInterface
      */
     private function getResistance(): float
     {
-        $max = max($this->values);
-        $avg = array_sum($this->values) / count($this->values);
+        $max = max($this->values[0]);
+        $avg = array_sum($this->values[0]) / count($this->values[0]);
 
         return ($max + $avg) / 2;
     }
@@ -82,8 +82,8 @@ class SupportResistance implements IndicatorInterface
      */
     private function getSupport(): float
     {
-        $min = min($this->values);
-        $avg = array_sum($this->values) / count($this->values);
+        $min = min($this->values[1]);
+        $avg = array_sum($this->values[1]) / count($this->values[1]);
 
         return ($min + $avg) / 2;
     }
