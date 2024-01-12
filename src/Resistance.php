@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FjrSoftware\Flinkbot\Indicator;
 
-class SupportResistance implements IndicatorInterface
+class Resistance implements IndicatorInterface
 {
     /**
      * @var array
@@ -25,8 +25,7 @@ class SupportResistance implements IndicatorInterface
         private readonly array $values
     ) {
         $this->result = [
-            $this->getResistance(),
-            $this->getSupport()
+            $this->getResistance()
         ];
     }
 
@@ -73,18 +72,5 @@ class SupportResistance implements IndicatorInterface
         $avg = array_sum($this->values[2]) / count($this->values[2]);
 
         return ($max + $avg) / 2;
-    }
-
-    /**
-     * Get support
-     *
-     * @return float
-     */
-    private function getSupport(): float
-    {
-        $min = min($this->values[2]);
-        $avg = array_sum($this->values[2]) / count($this->values[2]);
-
-        return ($min + $avg) / 2;
     }
 }
